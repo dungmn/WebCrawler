@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @hot.title %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @hot.points %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @hot.comment %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @hot.image_url %>
+</p>
+
+<%= link_to 'Edit', edit_hot_path(@hot) %> |
+<%= link_to 'Back', hots_path %>
