@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Fresh</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Points</th>
+      <th>Comment</th>
+      <th>Image url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fresh.each do |hot| %>
+      <tr>
+        <td><%= hot.title %></td>
+        <td><%= hot.points %></td>
+        <td><%= hot.comment %></td>
+        <td><%= hot.image_url %></td>
+        <td><%= link_to 'Show', hot %></td>
+        <td><%= link_to 'Edit', edit_hot_path(hot) %></td>
+        <td><%= link_to 'Destroy', hot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Go to Data Hot', hot_db_path %>
+<br>
+<%= link_to 'Go to Data Trending', trending_db_path %>
+<br>
+<%= link_to 'Go to Data Cute', cute_db_path %>
+<br>
+<%= link_to 'Back to Crawl Page', root_path %>

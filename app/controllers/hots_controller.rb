@@ -12,17 +12,14 @@ class HotsController < ApplicationController
     @hots = Hot.all
   end
 
-  def crawl
-    @article_array = []
-    link = "https://9gag.com/hot/"
+  def crawlTopic topic, link
     browser = Watir::Browser.new
     browser.goto link
     sleep 2
     page_hot = Nokogiri::HTML(browser.html)
-    # page_hot = Nokogiri::HTML(open(link))
     list_article = page_hot.css('article')
     browser.close
-    puts list_article.count
+    # puts list_article.count
     # @insert =  list_article[0]
     list_article.each_with_index do |post, num|
       #Lấy nội dụng title
@@ -33,9 +30,6 @@ class HotsController < ApplicationController
 
       #Lay comment
       comment = post.search(".comment").text
-      #Lấy đường link từ attributes của thẻ a
-      # link = post.at("h2 a").attributes["href"].text
-
 
       #Lấy link ảnh từ attributes của thẻ img
       if post.at("video")
@@ -44,26 +38,36 @@ class HotsController < ApplicationController
         image = post.at("img").attributes["src"].text
       end
 
-      Hot.where(title: title).first_or_create(
+      topic.where(title: title).first_or_create(
         title: title,
         points: points,
         comment: comment,
         image_url:image)
-      # #Luu vao database
-      # temp = Hot.new
-      # temp.title = title
-      # temp.points = points
-      # temp.comment = comment
-      # temp.image_url = image
-      # temp.save
     end
-    @hots = Hot.all
-  end
-  # GET /hots/1
-  # GET /hots/1.json
-  def show
   end
 
+  def crawl
+    link_hot = 'https://9gag.com/hot'
+    link_trending = 'https://9gag.com/trending'
+    link_fresh = 'https://9gag.com/fresh'
+    link_cute = 'https://9gag.com/cute'
+    # crawlTopic(Hot,link_hot)
+    # crawlTopic(Trending,link_trending)
+    # crawlTopic(Fresh,link_fresh)
+    crawlTopic(Cute,link_cute)
+  end
+  def dbhot
+    @hots = Hot.all
+  end
+  def dbtrending
+    @trending = Trending.all
+  end
+  def dbfresh
+    @fresh = Fresh.all
+  end
+  def dbcute
+    @cutes = Cute.all
+  end
   # GET /hots/new
   def new
     @hot = Hot.new
