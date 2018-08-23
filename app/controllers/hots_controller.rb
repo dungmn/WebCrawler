@@ -51,9 +51,9 @@ class HotsController < ApplicationController
     link_trending = 'https://9gag.com/trending'
     link_fresh = 'https://9gag.com/fresh'
     link_cute = 'https://9gag.com/cute'
-    # crawlTopic(Hot,link_hot)
-    # crawlTopic(Trending,link_trending)
-    # crawlTopic(Fresh,link_fresh)
+    crawlTopic(Hot,link_hot)
+    crawlTopic(Trending,link_trending)
+    crawlTopic(Fresh,link_fresh)
     crawlTopic(Cute,link_cute)
   end
   def dbhot
